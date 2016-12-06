@@ -66,7 +66,11 @@ post '/update_employee' do
 end
 
 get '/search_employee' do
-  @employees = Employee.where(name: params["search"])
+  # full search
+  # @employees = Employee.where(name: params["search"])
+
+  # This would be partial match
+  @employees = Employee.where("name like ?", "%#{params["search"]}%")
 
   erb :employees
 end
@@ -76,4 +80,74 @@ get '/delete_employee' do
   employee.delete
 
   redirect to('/employees')
+end
+###### Courses
+
+class Course < ActiveRecord::Base
+  self.primary_key = :id
+end
+
+# Sinatra code starts here
+
+# This magic tells Sinatra to close the database connection
+# after each request
+after do
+  ActiveRecord::Base.connection.close
+end
+
+get '/' do
+  erb :home
+end
+
+get '/courses' do
+  @courses = Course.all
+
+  erb :courses
+end
+
+get '/new_course' do
+  erb :new_course
+end
+
+post '/create_course' do
+  Course.create(params)
+
+  redirect to("/courses")
+end
+
+get '/show_course' do
+  @course = Course.find(params["id"])
+
+  erb :course
+end
+
+get '/edit_course' do
+  @course = Course.find(params["id"])
+
+  erb :edit_course
+end
+
+post '/update_course' do
+  course = Course.find(params["id"])
+
+  course.update_attributes(params)
+
+  redirect to("/courses")
+end
+
+get '/search_course' do
+  # full search
+  # @courses = Course.where(name: params["search"])
+
+  # This would be partial match
+  @courses = Course.where("name like ?", "%#{params["search"]}%")
+
+  erb :courses
+end
+
+get '/delete_course' do
+  course = Course.find(params["id"])
+  course.delete
+
+  redirect to('/courses')
 end

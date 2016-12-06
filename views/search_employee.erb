@@ -33,7 +33,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="/">Home</a></li>
             <li><a href="/employees">Employees</a></li>
             <li><a href="/courses">Courses</a></li>
           </ul>
@@ -41,10 +41,21 @@
       </div><!-- /.container-fluid -->
     </nav>
     <div class="container-fluid">
-      <div class="jumbotron text-center">
-        <h1>TIY Database!</h1>
-        <h2>Your data, when you need it.</h2>
+      <div class="page-header">
+        <h1>Employee details</h1>
       </div>
+    <% @employees.each do|employee| %>
+      <ul class="list-group">
+        <li class="list-group-item"><%= employee.name %></li>
+        <li class="list-group-item"><%= employee.phone %></li>
+        <li class="list-group-item"><%= employee.address %></li>
+        <li class="list-group-item"><%= employee.position %></li>
+        <li class="list-group-item"><%= employee.salary %></li>
+        <li class="list-group-item"><%= employee.github %></li>
+        <li class="list-group-item"><%= employee.slack %></li>
+      </ul>
+    <% end %>
+
     </div>
 
 

@@ -33,8 +33,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Employees</a></li>
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/employees">Employees</a></li>
+            <li><a href="/courses">Courses</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -42,10 +43,10 @@
     <div class="container-fluid">
       <div class="page-header">
         <h1>Edit an employee</h1>
-        <h2>id: <%= @employee.id %></h2>
+        <h2>ID: <%= @employee.id %></h2>
       </div>
       <form action="/update_employee" method="post">
-        <input type="hidden" class="form-control" name="id" value="<%= @employee.id %>">
+        <input type="hidden" class="form-control" name="id" value="<%= @employee.id %>">  <!-- You don't want to show id to be editted.. -->
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" name="name" value="<%= @employee.name %>">
